@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:loginfire/styles/colors.dart';
 import 'package:loginfire/styles/styles.dart';
 import 'package:loginfire/screens/doctor_detail.dart';
+import 'package:loginfire/main.dart';
+
 List<Map> doctors = [
   {
     'spec': 'Physician',
@@ -85,10 +87,7 @@ class HomeTab extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            for (var doctor in doctors)
-              TopDoctorCard(
-                spec:doctor['spec']
-              )
+            for (var doctor in doctors) TopDoctorCard(spec: doctor['spec'])
           ],
         ),
       ),
@@ -109,24 +108,29 @@ class TopDoctorCard extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Navigator.push(
-                  context,
-                  MaterialPageRoute(builder:(context) =>SliverDoctorDetail()),);
+            context,
+            MaterialPageRoute(builder: (context) => SliverDoctorDetail()),
+          );
         },
         child: Row(
           children: [
             Container(
-             height: 100.0,
-          width: 1100.0,
-          color: Colors.transparent,
-          child: Container(
-            decoration: BoxDecoration(
-                color: Colors.yellow[50],
-                borderRadius: BorderRadius.all(Radius.circular(10.0))),
-            child: new Center(
-              child: new Text(spec, 
-              style: kTitleStyle,
-              textAlign: TextAlign.center,),),),)
-           
+              height: 100.0,
+              width: 976.0,
+              color: Colors.transparent,
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.yellow[50],
+                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                child: new Center(
+                  child: new Text(
+                    spec,
+                    style: kTitleStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),
@@ -169,7 +173,6 @@ class AppointmentCard extends StatelessWidget {
                         SizedBox(
                           width: 10,
                         ),
-
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -180,8 +183,8 @@ class AppointmentCard extends StatelessWidget {
                               height: 2,
                             ),
                             Text(
-                              'ORTHODONTIST',
-                              style: TextStyle(color: Colors.white),
+                              'Dental Specialist',
+                              style: TextStyle(color: Color(MyColors.text01)),
                             ),
                           ],
                         ),
@@ -225,8 +228,6 @@ class AppointmentCard extends StatelessWidget {
     );
   }
 }
-
-
 
 class ScheduleCard extends StatelessWidget {
   const ScheduleCard({
@@ -313,12 +314,12 @@ class SearchInput extends StatelessWidget {
                 border: InputBorder.none,
                 hintText: 'Search a doctor or health issue',
                 hintStyle: TextStyle(
-                    fontSize: 13,
-                    color: Color(MyColors.purple01),
-                    //fontWeight: FontWeight.w700),
+                  fontSize: 13,
+                  color: Color(MyColors.purple01),
+                  //fontWeight: FontWeight.w700),
+                ),
               ),
             ),
-          ),
           ),
         ],
       ),
@@ -341,7 +342,7 @@ class UserIntro extends StatelessWidget {
           children: const [
             Text(
               'Hello',
-             // style: TextStyle(fontWeight: FontWeight.w500),
+              // style: TextStyle(fontWeight: FontWeight.w500),
             ),
             Text(
               'User👋',
@@ -349,8 +350,26 @@ class UserIntro extends StatelessWidget {
             ),
           ],
         ),
-        const CircleAvatar(
-          backgroundColor: Colors.blue,
+        Column(
+          children: [
+            const CircleAvatar(
+              backgroundColor: Colors.blue,
+            ),
+            TextButton(
+              child: Text(
+                'Log Out',
+                style: TextStyle(
+                  color: Color(MyColors.yellow01),
+                  //fontWeight: FontWeight.bold,
+                ),
+              ),
+              onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: ((context) => MyApp()),
+                  )),
+            )
+          ],
         )
       ],
     );
