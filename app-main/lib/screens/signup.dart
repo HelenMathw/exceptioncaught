@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:loginfire/screens/home.dart';
 import 'package:loginfire/main.dart';
+import 'package:loginfire/screens/location.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -20,15 +23,14 @@ class _SignUpState extends State<SignUp> {
         title: const Center(
           child: Text(
             "Sign Up Page",
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.black),
           ),
         ),
-        backgroundColor: Colors.indigo[800],
+        backgroundColor: Color.fromARGB(255, 189, 235, 212),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-         /*
           Container(
             alignment: Alignment.center,
             padding: EdgeInsets.all(10.0),
@@ -40,7 +42,7 @@ class _SignUpState extends State<SignUp> {
                 fontSize: 20,
               ),
             ),
-          ),*/
+          ),
           Container(
             padding: EdgeInsets.all(10.0),
             child: TextField(
@@ -76,18 +78,12 @@ class _SignUpState extends State<SignUp> {
             height: 50,
             padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
             child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.blue[100], // background (button) color
-          foregroundColor: Colors.white, // foreground (text) color
-  ),
               child: const Text("Sign up"),
               onPressed: () {
-                //print(nameController.text);
-                //print(emailController.text);
-                //print(passwordController.text);
+                FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailController.text, password: passwordController.text);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Home()),
+                  MaterialPageRoute(builder: (context) => LocationPage()),
                 );
               },
             ),
@@ -101,6 +97,7 @@ class _SignUpState extends State<SignUp> {
                   style: TextStyle(fontSize: 16),
                 ),
                 onPressed: () {
+
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => Login()),
